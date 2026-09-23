@@ -1,0 +1,21 @@
+# Makuuchi Manga
+
+> A fan-made companion site for the Aki Basho 2026 Grand Sumo Tournament (Ryōgoku Kokugikan, Tokyo, September 13–27 2026), reimagining the Makuuchi division's daily results as manga-style illustrated cards. Every wrestler is drawn as an original manga character (AI-generated art built from official broadcast stills); every result, rank, technique (kimarite) and statistic is sourced from sumo-api.com and is factually accurate to the real tournament. Unofficial — not affiliated with the Japan Sumo Association or NHK.
+
+Each day of the tournament has its own page with: an embedded video recap in manga style (4K, HDR10, Dolby Vision), a bilingual (English/Japanese) written summary of that day's storylines, the full 20-bout results list, the complete Makuuchi standings as they stood after that day (win-loss record, day-by-day form, current streak), and per-wrestler stats (fighting-style breakdown between pushing/thrusting and grappling/belt techniques, height/weight/age versus the field, best win of the tournament so far).
+
+Three wrestlers (Hoshoryu, Wakatakakage, Wakanosho) have been absent (kyūjō) since Day 1; a Jūryō-division wrestler is called up as a guest each day to keep the card at 20 bouts.
+
+## Days published
+
+- [Day 1](https://masume.art/day/1/)
+- [Day 2](https://masume.art/day/2/)
+- [Day 3](https://masume.art/day/3/)
+- [Day 4](https://masume.art/day/4/)
+- [Day 5](https://masume.art/day/5/)
+- [Day 6](https://masume.art/day/6/)
+- [Day 7](https://masume.art/day/7/)
+- [Day 8](https://masume.art/day/8/)
+- [Day 9](https://masume.art/) (current)
+
+More days are added as the 15-day tournament continues.

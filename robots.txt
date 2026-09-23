@@ -1,0 +1,41 @@
+# Makuuchi Manga (masume.art) — fully open to search and AI crawlers.
+# Every page is static, pre-rendered HTML: nothing here needs JS to be readable.
+
+User-agent: *
+Allow: /
+
+# Explicitly welcomed (redundant with the wildcard above, listed for clarity):
+# search/answer engines that may cite this site —
+User-agent: Googlebot
+Allow: /
+User-agent: Bingbot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: Claude-User
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Perplexity-User
+Allow: /
+User-agent: Applebot
+Allow: /
+# and AI model-training crawlers —
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: CCBot
+Allow: /
+User-agent: Bytespider
+Allow: /
+User-agent: Amazonbot
+Allow: /
+
+Sitemap: https://masume.art/sitemap.xml
