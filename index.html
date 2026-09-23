@@ -36,16 +36,18 @@ a{color:inherit}
 }
 .brand{display:flex;align-items:baseline;gap:10px}
 .brand .mark{font-family:Anton,"Zen Kaku Gothic New",sans-serif;font-size:22px;letter-spacing:.03em}
-.brand .sub{font-size:12px;color:var(--ink-faint);letter-spacing:.08em;text-transform:uppercase}
 .daynav{display:flex;gap:6px;flex-wrap:wrap}
-.daynav a{
+.daynav .chip{
   width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;
-  font-family:"JetBrains Mono";font-size:11px;font-weight:700;text-decoration:none;
+  font-family:"JetBrains Mono";font-size:11px;font-weight:700;
   background:var(--surface-2);color:var(--ink-faint);border:1px solid var(--line-soft);
+  font:inherit;padding:0;cursor:pointer;appearance:none;
 }
-.daynav a.done{background:var(--gold);color:var(--gold-ink);border-color:var(--gold)}
-.daynav a.current{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.daynav a.todo{opacity:.45}
+.daynav button.chip:hover{border-color:var(--gold-dim);color:var(--ink)}
+.daynav button.chip:focus-visible{outline:2px solid var(--gold-dim);outline-offset:1px}
+.daynav .chip.done{background:var(--gold);color:var(--gold-ink);border-color:var(--gold)}
+.daynav .chip.current{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.daynav .chip.todo{opacity:.4;cursor:default}
 
 /* ---------- hero ---------- */
 .hero{
@@ -61,26 +63,15 @@ a{color:inherit}
 }
 @media (max-width:640px){.hero{grid-template-columns:1fr}}
 .hero-video{position:relative}
-.player{
-  position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;
-  border:1px solid var(--line);background:#000;
-}
-.player img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.05)}
-.player .scrim{position:absolute;inset:0;background:linear-gradient(0deg,#000000cc,#00000000 45%)}
-.player .badges{position:absolute;top:10px;left:10px;display:flex;gap:6px}
-.player .badge{
+.yt-wrap{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#000}
+.yt-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.yt-meta{display:flex;align-items:center;gap:6px;margin-top:8px;flex-wrap:wrap}
+.yt-meta .badge{
   font-family:"JetBrains Mono";font-size:10px;font-weight:700;letter-spacing:.04em;
-  background:#000000a8;border:1px solid #ffffff30;color:#f5f2e8;padding:3px 7px;border-radius:6px;
+  background:var(--surface-2);border:1px solid var(--line);color:var(--ink-dim);padding:3px 7px;border-radius:6px;
 }
-.player .play{
-  position:absolute;inset:0;margin:auto;width:56px;height:56px;border-radius:50%;
-  background:#ffffffee;display:flex;align-items:center;justify-content:center;
-}
-.player .play svg{width:20px;height:20px;fill:#0a0b12;margin-left:3px}
-.player .caption{position:absolute;bottom:10px;left:12px;right:12px;
-  display:flex;justify-content:space-between;align-items:flex-end;gap:8px}
-.player .duration{font-family:"JetBrains Mono";font-size:11px;color:#f5f2e8;background:#00000099;padding:2px 6px;border-radius:5px}
-.preview-note{margin-top:8px;font-size:11.5px;color:var(--ink-faint);line-height:1.5}
+.yt-external{margin-left:auto;font-size:11.5px;color:var(--gold-text);text-decoration:none;font-weight:700}
+.yt-external:hover{text-decoration:underline}
 
 .hero-info{display:flex;flex-direction:column;gap:14px;min-width:0}
 .eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-text);font-weight:700}
@@ -150,19 +141,24 @@ section{margin-top:34px}
   font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);border-bottom:1px solid var(--line-soft)}
 .shead span:nth-child(2){visibility:hidden}
 @media (max-width:600px){.shead .srank-h{display:none}}
-.srow{display:grid;grid-template-columns:28px 34px 1fr auto 92px auto;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid var(--line-soft)}
+.srow{display:grid;grid-template-columns:28px 34px 1fr auto 92px auto;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid var(--line-soft);
+  cursor:pointer;user-select:none}
 .srow:last-child{border-bottom:none}
 .srow:nth-child(odd){background:#00000006}
-.srow.absent{opacity:.5}
+.srow:hover{background:var(--surface-2)}
+.srow:focus-visible{outline:2px solid var(--gold-dim);outline-offset:-2px}
+.srow.absent{opacity:.5;cursor:default}
 .spos{font-family:"JetBrains Mono";font-size:12px;color:var(--ink-faint);text-align:center}
 .srow.top .spos{color:var(--gold-text);font-weight:700}
 .srow img{width:30px;height:30px;border-radius:7px;object-fit:cover;background:var(--surface-2);border:1px solid var(--line-soft)}
 .sname{min-width:0}
 .sname .name{font-size:13px;font-weight:700}
 .sname .jp{font-size:11px;color:var(--ink-faint);margin-left:6px}
+.srow .chev{margin-left:2px;font-size:9px;color:var(--ink-faint);transition:transform .15s}
+.srow.open .chev{transform:rotate(90deg)}
 .srank{font-size:11px;color:var(--ink-dim);white-space:nowrap}
 @media (max-width:600px){.srank{display:none}}
-.formdots{display:flex;gap:3px}
+.formdots{display:flex;gap:3px;flex-wrap:wrap;max-width:92px}
 .formdots span{width:7px;height:7px;border-radius:2px;flex:none;background:var(--line-soft);border:1px solid var(--line)}
 .formdots span.w{background:var(--gold);border-color:var(--gold)}
 .formdots span.l{background:var(--ink-faint);border-color:var(--ink-faint)}
@@ -173,12 +169,6 @@ section{margin-top:34px}
 .sstreak{font-size:9.5px;color:var(--ink-faint);white-space:nowrap}
 .sstreak.hot{color:var(--gold-text)}
 .tag-abs{font-family:"JetBrains Mono";font-size:9.5px;background:var(--absent);color:var(--ink-dim);padding:2px 6px;border-radius:5px}
-.srow{cursor:pointer;user-select:none}
-.srow:hover{background:var(--surface-2)}
-.srow:focus-visible{outline:2px solid var(--gold-dim);outline-offset:-2px}
-.srow.absent{cursor:default}
-.srow .chev{margin-left:2px;font-size:9px;color:var(--ink-faint);transition:transform .15s}
-.srow.open .chev{transform:rotate(90deg)}
 
 /* ---------- player detail panel ---------- */
 .sdetail[hidden]{display:none}
@@ -237,30 +227,24 @@ footer p{font-size:11.5px;color:var(--ink-faint);line-height:1.7;max-width:70ch}
 
   <div class="hero">
     <div class="hero-video">
-      <div class="player">
-        <img src="media/day09-thumb.jpg" alt="Sadanoumi vs Tokihayate, manga-style VS card, Day 9">
-        <div class="scrim"></div>
-        <div class="badges">
-          <span class="badge">4K</span>
-          <span class="badge">HDR10</span>
-          <span class="badge">DOLBY VISION</span>
-        </div>
-        <div class="play" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        </div>
-        <div class="caption">
-          <span></span>
-          <span class="duration">04:24</span>
-        </div>
+      <div class="yt-wrap">
+        <iframe id="ytFrame" src="" title="" loading="lazy"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
       </div>
-      <p class="preview-note">Preview frame — the YouTube embed replaces this once Day 9 is published.</p>
+      <div class="yt-meta">
+        <span class="badge">4K</span>
+        <span class="badge">HDR10</span>
+        <span class="badge">DOLBY VISION</span>
+        <a id="ytLink" class="yt-external" href="#" target="_blank" rel="noopener">Watch on YouTube ↗</a>
+      </div>
     </div>
 
     <div class="hero-info">
       <div>
         <span class="eyebrow">Aki Basho 秋場所 · September 2026</span>
-        <h1>DAY 9</h1>
-        <div class="date">20 bouts · Makuuchi division · all-manga cast</div>
+        <h1 id="dayTitle">DAY 9</h1>
+        <div class="date" id="dayMeta">20 bouts · Makuuchi division · all-manga cast</div>
       </div>
       <div class="leader-card" id="leaderCard"></div>
     </div>
@@ -271,14 +255,14 @@ footer p{font-size:11.5px;color:var(--ink-faint);line-height:1.7;max-width:70ch}
     <div class="recap">
       <div class="recap-panel en">
         <span class="lang">English</span>
-        <p>Day 9 stayed spotless at the very top: Yokozuna Onosato dispatched Fujiryoga by hand&#8209;pull&#8209;down to move to 8&#8209;1, keeping sole control of the yūshō race — one win clear of a four&#8209;way chase group at 7&#8209;2 (Atamifuji, Fujinokawa, Churanoumi, Kinbozan). Higher up the banzuke, Ozeki Kirishima was pulled down by Komusubi Daieisho and slipped to 5&#8209;4, while fellow Ozeki Aonishiki improved to 6&#8209;3 with a beltless&#8209;arm throw over Yoshinofuji. Force&#8209;outs and push&#8209;outs — the tournament's two most common finishes overall — accounted for less than half of the day's twenty bouts this time, with hand&#8209;pull&#8209;downs almost as frequent. Jūryō call&#8209;up Sadanoumi, standing in for the still&#8209;absent Wakanosho, lost his manga debut to Tokihayate by yorikiri.</p>
+        <p id="recapEn"></p>
       </div>
       <div class="recap-panel jp">
         <span class="lang">日本語</span>
-        <p>秋場所9日目、横綱・大の里が藤凌駕を引き落としで下して8勝1敗とし、優勝争いの単独トップを守った――7勝2敗で追う熱海富士・藤ノ川・美ノ海・金峰山の4人を1差でリード。上位では大関・霧島が小結・大栄翔に引き落としで敗れて5勝4敗となる一方、大関・安青錦はすくい投げで義ノ富士を降し6勝3敗とした。この日は寄り切り・押し出しの決まり手が全体の半数に届かず、引き落としもほぼ同数だった。若ノ勝の休場により十両から呼ばれた佐田の海は、マンガ初登場を時疾風に寄り切りで飾れなかった。</p>
+        <p id="recapJp"></p>
       </div>
     </div>
-    <p class="recap-note">Written from the day's results (winner, kimarite, records) — not copied from any outlet. The Japanese text is machine-composed and should be reviewed by a native speaker before publication.</p>
+    <p class="recap-note">Written from each day's results (winner, kimarite, records) — not copied from any outlet. The Japanese text is machine-composed and should be reviewed by a native speaker before publication.</p>
   </section>
 
   <section>
@@ -288,7 +272,7 @@ footer p{font-size:11.5px;color:var(--ink-faint);line-height:1.7;max-width:70ch}
   </section>
 
   <section>
-    <div class="section-head"><h2>Makuuchi standings</h2><span class="count">after day 9</span></div>
+    <div class="section-head"><h2>Makuuchi standings</h2><span class="count" id="standingsCount">after day 9</span></div>
     <div class="standings">
       <div class="standings-legend">
         <span class="lg"><span class="dot" style="background:var(--gold);border:1px solid var(--gold)"></span>win</span>
@@ -302,11 +286,11 @@ footer p{font-size:11.5px;color:var(--ink-faint);line-height:1.7;max-width:70ch}
   </section>
 
   <section>
-    <div class="section-head"><h2>Tournament stats</h2><span class="count">days 1–9</span></div>
+    <div class="section-head"><h2>Tournament stats</h2><span class="count" id="statsCount">days 1–9</span></div>
     <div class="stats-grid">
       <div class="stat-card">
         <h3>Bouts fought so far</h3>
-        <div class="bigstat"><span class="num" id="totalBouts"></span><span class="lbl">Makuuchi bouts across 9 completed days</span></div>
+        <div class="bigstat"><span class="num" id="totalBouts"></span><span class="lbl" id="totalBoutsLbl">Makuuchi bouts across 9 completed days</span></div>
       </div>
       <div class="stat-card">
         <h3>Most-used kimarite</h3>
@@ -316,94 +300,15 @@ footer p{font-size:11.5px;color:var(--ink-faint);line-height:1.7;max-width:70ch}
   </section>
 
   <footer>
-    <p>Unofficial fan project. Faces and characters are AI-generated manga illustrations built from broadcast card captures; every result, rank and kimarite comes from sumo-api.com. Not affiliated with the Japan Sumo Association or NHK. This page is a design prototype for one day (Day 9) — the full site will cover every day of the basho.</p>
+    <p>Unofficial fan project. Faces and characters are AI-generated manga illustrations built from broadcast card captures; every result, rank and kimarite comes from sumo-api.com. Not affiliated with the Japan Sumo Association or NHK. 9 of the basho's 15 days are published so far — more are added as the tournament continues.</p>
   </footer>
 
 </div>
 
+<script src="data.js"></script>
 <script>
-const DATA = {
-  day:9,
-  bouts:[
-    {a_id:"35",a:"Sadanoumi",a_jp:"佐田の海",a_rank:"Juryo #5",b_id:"83",b:"Tokihayate",b_jp:"時疾風",b_rank:"Maegashira #15",winner_id:"83",kimarite_en:"Force out"},
-    {a_id:"49",a:"Shonannoumi",a_jp:"湘南乃海",a_rank:"Maegashira #17",b_id:"22",b:"Abi",b_jp:"阿炎",b_rank:"Maegashira #13",winner_id:"22",kimarite_en:"Push out"},
-    {a_id:"21",a:"Tobizaru",a_jp:"翔猿",a_rank:"Maegashira #14",b_id:"33",b:"Shodai",b_jp:"正代",b_rank:"Maegashira #11",winner_id:"21",kimarite_en:"Hand pull down"},
-    {a_id:"13",a:"Wakamotoharu",a_jp:"若元春",a_rank:"Maegashira #11",b_id:"8866",b:"Toshinofuji",b_jp:"寿之富士",b_rank:"Maegashira #16",winner_id:"13",kimarite_en:"Force out"},
-    {a_id:"39",a:"Chiyoshoma",a_jp:"千代翔馬",a_rank:"Maegashira #14",b_id:"50",b:"Kinbozan",b_jp:"金峰山",b_rank:"Maegashira #10",winner_id:"50",kimarite_en:"Push down"},
-    {a_id:"8859",a:"Asasuiryu",a_jp:"朝翠龍",a_rank:"Maegashira #15",b_id:"24",b:"Hiradoumi",b_jp:"平戸海",b_rank:"Maegashira #8",winner_id:"24",kimarite_en:"Slap down"},
-    {a_id:"5",a:"Takerufuji",a_jp:"尊富士",a_rank:"Maegashira #8",b_id:"164",b:"Asakoryu",b_jp:"朝紅龍",b_rank:"Maegashira #13",winner_id:"5",kimarite_en:"Force out"},
-    {a_id:"607",a:"Asahakuryu",a_jp:"朝白龍",a_rank:"Maegashira #12",b_id:"40",b:"Nishikifuji",b_jp:"錦富士",b_rank:"Maegashira #7",winner_id:"40",kimarite_en:"Force out"},
-    {a_id:"82",a:"Fujiseiun",a_jp:"藤青雲",a_rank:"Maegashira #7",b_id:"41",b:"Oho",b_jp:"王鵬",b_rank:"Maegashira #10",winner_id:"82",kimarite_en:"Force out"},
-    {a_id:"86",a:"Shishi",a_jp:"獅司",a_rank:"Maegashira #9",b_id:"11",b:"Ichiyamamoto",b_jp:"一山本",b_rank:"Maegashira #6",winner_id:"86",kimarite_en:"Armlock throw"},
-    {a_id:"28",a:"Ura",a_jp:"宇良",a_rank:"Maegashira #9",b_id:"61",b:"Oshoma",b_jp:"欧勝馬",b_rank:"Maegashira #5",winner_id:"61",kimarite_en:"Slap down"},
-    {a_id:"37",a:"Takanosho",a_jp:"隆の勝",a_rank:"Maegashira #4",b_id:"2",b:"Asanoyama",b_jp:"朝乃山",b_rank:"Maegashira #6",winner_id:"37",kimarite_en:"Hand pull down"},
-    {a_id:"55",a:"Roga",a_jp:"狼雅",a_rank:"Maegashira #5",b_id:"71",b:"Churanoumi",b_jp:"美ノ海",b_rank:"Maegashira #3",winner_id:"71",kimarite_en:"Push out"},
-    {a_id:"8",a:"Kotoshoho",a_jp:"琴勝峰",a_rank:"Maegashira #1",b_id:"56",b:"Gonoyama",b_jp:"豪ノ山",b_rank:"Maegashira #3",winner_id:"8",kimarite_en:"Push out"},
-    {a_id:"3",a:"Hakunofuji",a_jp:"伯乃富士",a_rank:"Komusubi #1",b_id:"112",b:"Kotoeiho",b_jp:"琴栄峰",b_rank:"Maegashira #1",winner_id:"3",kimarite_en:"Force out"},
-    {a_id:"74",a:"Atamifuji",a_jp:"熱海富士",a_rank:"Sekiwake #1",b_id:"44",b:"Takayasu",b_jp:"高安",b_rank:"Maegashira #2",winner_id:"74",kimarite_en:"Push down"},
-    {a_id:"615",a:"Fujinokawa",a_jp:"藤ノ川",a_rank:"Sekiwake #1",b_id:"20",b:"Kotozakura",b_jp:"琴櫻",b_rank:"Ozeki #1",winner_id:"615",kimarite_en:"Overarm throw"},
-    {a_id:"7",a:"Kirishima",a_jp:"霧島",a_rank:"Ozeki #1",b_id:"9",b:"Daieisho",b_jp:"大栄翔",b_rank:"Komusubi #1",winner_id:"9",kimarite_en:"Hand pull down"},
-    {a_id:"8854",a:"Aonishiki",a_jp:"安青錦",a_rank:"Ozeki #2",b_id:"8857",b:"Yoshinofuji",b_jp:"義ノ富士",b_rank:"Maegashira #2",winner_id:"8854",kimarite_en:"Beltless arm throw"},
-    {a_id:"8850",a:"Onosato",a_jp:"大の里",a_rank:"Yokozuna #1",b_id:"9051",b:"Fujiryoga",b_jp:"藤凌駕",b_rank:"Maegashira #4",winner_id:"8850",kimarite_en:"Hand pull down"}
-  ],
-  standings:[{"id":"8850","name":"Onosato","jp":"大の里","rank":"Yokozuna #1","rec":[8,1],"form":"WWWLWWWWW","streak":["W",5],"absent":false,"fav":"Push out","h":190,"wt":188,"age":26,"style":{"other":3,"oshi":3,"yotsu":2},"bw":{"name":"Daieisho","rank":"Komusubi #1","day":1}},{"id":"74","name":"Atamifuji","jp":"熱海富士","rank":"Sekiwake #1","rec":[7,2],"form":"WWLWWWLWW","streak":["W",2],"absent":false,"fav":"Push out","h":185,"wt":198,"age":24,"style":{"yotsu":1,"oshi":6},"bw":{"name":"Daieisho","rank":"Komusubi #1","day":5}},{"id":"615","name":"Fujinokawa","jp":"藤ノ川","rank":"Sekiwake #1","rec":[7,2],"form":"WLWLWWWWW","streak":["W",5],"absent":false,"fav":"Push out","h":177,"wt":125,"age":21,"style":{"yotsu":3,"oshi":4},"bw":{"name":"Kotozakura","rank":"Ozeki #1","day":9}},{"id":"71","name":"Churanoumi","jp":"美ノ海","rank":"Maegashira #3","rec":[7,2],"form":"WLWWWWLWW","streak":["W",2],"absent":false,"fav":"Push out","h":176,"wt":157,"age":33,"style":{"yotsu":2,"oshi":4,"other":1},"bw":{"name":"Kotozakura","rank":"Ozeki #1","day":5}},{"id":"50","name":"Kinbozan","jp":"金峰山","rank":"Maegashira #10","rec":[7,2],"form":"WWLWLWWWW","streak":["W",4],"absent":false,"fav":"Force out","h":194,"wt":181,"age":29,"style":{"yotsu":3,"oshi":3,"other":1},"bw":{"name":"Fujiseiun","rank":"Maegashira #7","day":8}},{"id":"20","name":"Kotozakura","jp":"琴櫻","rank":"Ozeki #1","rec":[6,3],"form":"WWWWLWWLL","streak":["L",2],"absent":false,"fav":"Overarm throw","h":189,"wt":177,"age":28,"style":{"yotsu":3,"other":2,"oshi":1},"bw":{"name":"Daieisho","rank":"Komusubi #1","day":3}},{"id":"8854","name":"Aonishiki","jp":"安青錦","rank":"Ozeki #2","rec":[6,3],"form":"WWWLLLWWW","streak":["W",3],"absent":false,"fav":"Force out","h":182,"wt":142,"age":22,"style":{"yotsu":6},"bw":{"name":"Atamifuji","rank":"Sekiwake #1","day":7}},{"id":"2","name":"Asanoyama","jp":"朝乃山","rank":"Maegashira #6","rec":[6,3],"form":"WWLWWWLWL","streak":["L",1],"absent":false,"fav":"Force out","h":188,"wt":172,"age":32,"style":{"yotsu":4,"oshi":2},"bw":{"name":"Oshoma","rank":"Maegashira #5","day":4}},{"id":"82","name":"Fujiseiun","jp":"藤青雲","rank":"Maegashira #7","rec":[6,3],"form":"WWWLLWWLW","streak":["W",1],"absent":false,"fav":"Force out","h":185,"wt":149,"age":28,"style":{"yotsu":2,"other":3,"oshi":1},"bw":{"name":"Oshoma","rank":"Maegashira #5","day":6}},{"id":"5","name":"Takerufuji","jp":"尊富士","rank":"Maegashira #8","rec":[6,3],"form":"WWLWLWLWW","streak":["W",2],"absent":false,"fav":"Push out","h":186,"wt":149,"age":27,"style":{"oshi":4,"yotsu":2},"bw":{"name":"Oshoma","rank":"Maegashira #5","day":8}},{"id":"28","name":"Ura","jp":"宇良","rank":"Maegashira #9","rec":[6,3],"form":"WLWWWWLWL","streak":["L",1],"absent":false,"fav":"Arm bar throw","h":173,"wt":138,"age":34,"style":{"other":4,"oshi":2},"bw":{"name":"Ichiyamamoto","rank":"Maegashira #6","day":8}},{"id":"22","name":"Abi","jp":"阿炎","rank":"Maegashira #13","rec":[6,3],"form":"LLWWWWLWW","streak":["W",2],"absent":false,"fav":"Push out","h":186,"wt":167,"age":32,"style":{"oshi":5,"other":1},"bw":{"name":"Shodai","rank":"Maegashira #11","day":5}},{"id":"83","name":"Tokihayate","jp":"時疾風","rank":"Maegashira #15","rec":[6,3],"form":"WWLLWWLWW","streak":["W",2],"absent":false,"fav":"Force out","h":179,"wt":135,"age":30,"style":{"yotsu":4,"oshi":1,"other":1},"bw":{"name":"Asakoryu","rank":"Maegashira #13","day":5}},{"id":"8866","name":"Toshinofuji","jp":"寿之富士","rank":"Maegashira #16","rec":[6,3],"form":"LWWWWWLWL","streak":["L",1],"absent":false,"fav":"Force out","h":195,"wt":156,"age":26,"style":{"yotsu":6},"bw":{"name":"Asakoryu","rank":"Maegashira #13","day":4}},{"id":"7","name":"Kirishima","jp":"霧島","rank":"Ozeki #1","rec":[5,4],"form":"WWLWWLWLL","streak":["L",2],"absent":false,"fav":"Overarm throw","h":186,"wt":150,"age":30,"style":{"yotsu":3,"other":2},"bw":{"name":"Hakunofuji","rank":"Komusubi #1","day":2}},{"id":"55","name":"Roga","jp":"狼雅","rank":"Maegashira #5","rec":[5,4],"form":"LWWWWLWLL","streak":["L",2],"absent":false,"fav":"Force out","h":185,"wt":159,"age":27,"style":{"yotsu":3,"oshi":2},"bw":{"name":"Fujiryoga","rank":"Maegashira #4","day":2}},{"id":"61","name":"Oshoma","jp":"欧勝馬","rank":"Maegashira #5","rec":[5,4],"form":"WLWLWLWLW","streak":["W",1],"absent":false,"fav":"Push out","h":190,"wt":162,"age":29,"style":{"other":2,"oshi":3},"bw":{"name":"Roga","rank":"Maegashira #5","day":1}},{"id":"24","name":"Hiradoumi","jp":"平戸海","rank":"Maegashira #8","rec":[5,4],"form":"LWLWWLLWW","streak":["W",2],"absent":false,"fav":"Push out","h":178,"wt":142,"age":26,"style":{"oshi":3,"yotsu":1,"other":1},"bw":{"name":"Roga","rank":"Maegashira #5","day":8}},{"id":"13","name":"Wakamotoharu","jp":"若元春","rank":"Maegashira #11","rec":[5,4],"form":"WLWWLWLLW","streak":["W",1],"absent":false,"fav":"Force out","h":186,"wt":149,"age":32,"style":{"yotsu":5},"bw":{"name":"Shishi","rank":"Maegashira #9","day":4}},{"id":"164","name":"Asakoryu","jp":"朝紅龍","rank":"Maegashira #13","rec":[5,4],"form":"WWWLLLWWL","streak":["L",1],"absent":false,"fav":"Push out","h":178,"wt":122,"age":27,"style":{"yotsu":2,"oshi":3},"bw":{"name":"Shodai","rank":"Maegashira #11","day":3}},{"id":"8","name":"Kotoshoho","jp":"琴勝峰","rank":"Maegashira #1","rec":[4,5],"form":"LLLWWLWLW","streak":["W",1],"absent":false,"fav":"Push out","h":189,"wt":170,"age":27,"style":{"oshi":3,"yotsu":1},"bw":{"name":"Fujinokawa","rank":"Sekiwake #1","day":4}},{"id":"37","name":"Takanosho","jp":"隆の勝","rank":"Maegashira #4","rec":[4,5],"form":"WWWLLLLLW","streak":["W",1],"absent":false,"fav":"Rear push out","h":184,"wt":176,"age":31,"style":{"other":2,"oshi":2},"bw":{"name":"Atamifuji","rank":"Sekiwake #1","day":3}},{"id":"86","name":"Shishi","jp":"獅司","rank":"Maegashira #9","rec":[4,5],"form":"LLWLWWLLW","streak":["W",1],"absent":false,"fav":"Force out","h":193,"wt":182,"age":29,"style":{"yotsu":4},"bw":{"name":"Ichiyamamoto","rank":"Maegashira #6","day":9}},{"id":"607","name":"Asahakuryu","jp":"朝白龍","rank":"Maegashira #12","rec":[4,5],"form":"WWLLWLWLL","streak":["L",2],"absent":false,"fav":"Force out","h":185,"wt":157,"age":27,"style":{"oshi":2,"yotsu":2},"bw":{"name":"Shishi","rank":"Maegashira #9","day":7}},{"id":"21","name":"Tobizaru","jp":"翔猿","rank":"Maegashira #14","rec":[4,5],"form":"LLLWWWLLW","streak":["W",1],"absent":false,"fav":"Hand pull down","h":173,"wt":135,"age":34,"style":{"yotsu":1,"other":3},"bw":{"name":"Shodai","rank":"Maegashira #11","day":9}},{"id":"39","name":"Chiyoshoma","jp":"千代翔馬","rank":"Maegashira #14","rec":[4,5],"form":"LLWWWLWLL","streak":["L",2],"absent":false,"fav":"Force out","h":184,"wt":144,"age":35,"style":{"yotsu":4},"bw":{"name":"Asahakuryu","rank":"Maegashira #12","day":4}},{"id":"8859","name":"Asasuiryu","jp":"朝翠龍","rank":"Maegashira #15","rec":[4,5],"form":"WWLWLLWLL","streak":["L",2],"absent":false,"fav":"Force out","h":175,"wt":120,"age":26,"style":{"yotsu":3,"other":1},"bw":{"name":"Chiyoshoma","rank":"Maegashira #14","day":1}},{"id":"3","name":"Hakunofuji","jp":"伯乃富士","rank":"Komusubi #1","rec":[3,6],"form":"LLLWLLLWW","streak":["W",2],"absent":false,"fav":"Push out","h":181,"wt":162,"age":23,"style":{"oshi":2,"yotsu":1},"bw":{"name":"Kotozakura","rank":"Ozeki #1","day":8}},{"id":"9","name":"Daieisho","jp":"大栄翔","rank":"Komusubi #1","rec":[3,6],"form":"LLLWLWLLW","streak":["W",1],"absent":false,"fav":"Frontal thrust down","h":182,"wt":163,"age":32,"style":{"oshi":1,"other":2},"bw":{"name":"Kirishima","rank":"Ozeki #1","day":9}},{"id":"44","name":"Takayasu","jp":"高安","rank":"Maegashira #2","rec":[3,6],"form":"LLWWLLWLL","streak":["L",2],"absent":false,"fav":"Hand pull down","h":188,"wt":173,"age":36,"style":{"other":2,"oshi":1},"bw":{"name":"Onosato","rank":"Yokozuna #1","day":4}},{"id":"8857","name":"Yoshinofuji","jp":"義ノ富士","rank":"Maegashira #2","rec":[3,6],"form":"LLLLLWWWL","streak":["L",1],"absent":false,"fav":"Overarm throw","h":185,"wt":162,"age":25,"style":{"yotsu":3},"bw":{"name":"Kirishima","rank":"Ozeki #1","day":6}},{"id":"9051","name":"Fujiryoga","jp":"藤凌駕","rank":"Maegashira #4","rec":[3,6],"form":"LLWLWLLWL","streak":["L",1],"absent":false,"fav":"Push down","h":180,"wt":184,"age":23,"style":{"oshi":1,"yotsu":1,"other":1},"bw":{"name":"Hakunofuji","rank":"Komusubi #1","day":3}},{"id":"40","name":"Nishikifuji","jp":"錦富士","rank":"Maegashira #7","rec":[3,6],"form":"LLWLLWLLW","streak":["W",1],"absent":false,"fav":"Thrust down","h":184,"wt":155,"age":30,"style":{"oshi":2,"yotsu":1},"bw":{"name":"Roga","rank":"Maegashira #5","day":6}},{"id":"41","name":"Oho","jp":"王鵬","rank":"Maegashira #10","rec":[3,6],"form":"LWLLLLWWL","streak":["L",1],"absent":false,"fav":"Force out","h":192,"wt":185,"age":26,"style":{"yotsu":2,"oshi":1},"bw":{"name":"Nishikifuji","rank":"Maegashira #7","day":8}},{"id":"112","name":"Kotoeiho","jp":"琴栄峰","rank":"Maegashira #1","rec":[2,7],"form":"LWLLLWLLL","streak":["L",3],"absent":false,"fav":"Frontal crush down","h":184,"wt":140,"age":23,"style":{"yotsu":1,"oshi":1},"bw":{"name":"Fujinokawa","rank":"Sekiwake #1","day":2}},{"id":"56","name":"Gonoyama","jp":"豪ノ山","rank":"Maegashira #3","rec":[2,7],"form":"LWLLWLLLL","streak":["L",4],"absent":false,"fav":"Arm hook-down","h":178,"wt":163,"age":28,"style":{"other":1,"oshi":1},"bw":{"name":"Aonishiki","rank":"Ozeki #2","day":5}},{"id":"33","name":"Shodai","jp":"正代","rank":"Maegashira #11","rec":[2,7],"form":"LLLLLLWWL","streak":["L",1],"absent":false,"fav":"Slap down","h":184,"wt":168,"age":34,"style":{"other":2},"bw":{"name":"Ura","rank":"Maegashira #9","day":7}},{"id":"49","name":"Shonannoumi","jp":"湘南乃海","rank":"Maegashira #17","rec":[2,7],"form":"LLLLLLWWL","streak":["L",1],"absent":false,"fav":"Overarm throw","h":193,"wt":180,"age":28,"style":{"yotsu":2},"bw":{"name":"Asahakuryu","rank":"Maegashira #12","day":8}},{"id":"11","name":"Ichiyamamoto","jp":"一山本","rank":"Maegashira #6","rec":[1,8],"form":"LLLLLLWLL","streak":["L",2],"absent":false,"fav":"Push down","h":190,"wt":160,"age":32,"style":{"oshi":1},"bw":{"name":"Nishikifuji","rank":"Maegashira #7","day":7}},{"id":"19","name":"Hoshoryu","jp":"豊昇龍","rank":"Yokozuna #1","rec":[0,0],"form":"AAAAAAAAA","streak":null,"absent":true,"fav":null,"h":188,"wt":148,"age":27,"style":{},"bw":null},{"id":"12","name":"Wakatakakage","jp":"若隆景","rank":"Maegashira #12","rec":[0,0],"form":"AAAAAAAAA","streak":null,"absent":true,"fav":null,"h":183,"wt":138,"age":31,"style":{},"bw":null},{"id":"195","name":"Wakanosho","jp":"若ノ勝","rank":"Maegashira #16","rec":[0,0],"form":"AAAAAAAAA","streak":null,"absent":true,"fav":null,"h":178,"wt":143,"age":23,"style":{},"bw":null}],
-  field:{"h":{"min":173,"max":195,"avg":184.3},"wt":{"min":120,"max":198,"avg":157.8},"age":{"min":21,"max":36,"avg":28.4}},
-  kim_stats:[
-    {en:"Force out",count:53},{en:"Push out",count:42},{en:"Overarm throw",count:11},
-    {en:"Slap down",count:11},{en:"Thrust down",count:10},{en:"Push down",count:9},
-    {en:"Hand pull down",count:7},{en:"Frontal crush down",count:7}
-  ],
-  total_bouts_so_far:180
-};
-
 const portrait = id => `portraits/${id}.png`;
 const isGuest = rank => rank.startsWith('Juryo');
-
-// day nav
-const nav = document.getElementById('daynav');
-for(let d=1; d<=15; d++){
-  const el = document.createElement(d===9 ? 'span' : 'a');
-  el.textContent = d;
-  el.className = d===9 ? 'current' : (d<9 ? 'done' : 'todo');
-  if(d!==9){ el.href = '#'; el.setAttribute('aria-disabled','true'); el.onclick = e => e.preventDefault(); }
-  nav.appendChild(el);
-}
-
-// leader card
-const L = DATA.standings[0];
-document.getElementById('leaderCard').innerHTML = `
-  <img src="${portrait(L.id)}" alt="${L.name}">
-  <div>
-    <div class="l1">Yūshō race leader</div>
-    <div class="l2">${L.name}</div>
-    <div class="l3">${L.jp} · ${L.rank} · ${L.streak[1]}${L.streak[0]} streak</div>
-  </div>
-  <div class="rec">${L.rec[0]}<small>&nbsp;-&nbsp;</small>${L.rec[1]}</div>
-`;
-
-// bouts
-document.getElementById('boutCount').textContent = `${DATA.bouts.length} bouts`;
-const boutsEl = document.getElementById('bouts');
-DATA.bouts.forEach((b,i)=>{
-  const aWin = b.winner_id === b.a_id;
-  const row = document.createElement('div');
-  row.className = 'bout';
-  row.innerHTML = `
-    <div class="n">${i+1}</div>
-    <div class="side east ${aWin?'':'loser'}">
-      <img src="${portrait(b.a_id)}" alt="${b.a}">
-      <div class="nm"><div class="name">${b.a}${isGuest(b.a_rank)?'<span class="guest-badge">GUEST</span>':''}</div><div class="rank">${b.a_rank}</div></div>
-    </div>
-    <div class="vs">VS<span class="kim">${b.kimarite_en}</span></div>
-    <div class="side b west ${aWin?'loser':''}">
-      <img src="${portrait(b.b_id)}" alt="${b.b}">
-      <div class="nm"><div class="name">${b.b}${isGuest(b.b_rank)?'<span class="guest-badge">GUEST</span>':''}</div><div class="rank">${b.b_rank}</div></div>
-    </div>
-  `;
-  boutsEl.appendChild(row);
-});
-
-// standings — form dots (win/loss/absent per day)
 const dayLabel = d => `Day ${d+1}`;
 const dotsHtml = form => [...form].map((c,d)=>{
   const cls = c==='W' ? 'w' : c==='L' ? 'l' : 'a';
@@ -420,7 +325,6 @@ function styleBar(style){
   const legend = segs.map(k=>`<span><b class="${k}"></b>${STYLE_LABEL[k].split(' (')[0]} · ${style[k]}</span>`).join('');
   return `<div class="style-bar">${bar}</div><div class="style-legend">${legend}</div>`;
 }
-
 function rangeRow(label, value, unit, field){
   const pct = Math.max(2, Math.min(98, (value-field.min)/(field.max-field.min)*100));
   const avgPct = (field.avg-field.min)/(field.max-field.min)*100;
@@ -432,70 +336,150 @@ function rangeRow(label, value, unit, field){
   </div>`;
 }
 
-const standingsEl = document.getElementById('standings');
-DATA.standings.forEach((r,i)=>{
-  const row = document.createElement('div');
-  row.className = 'srow' + (r.absent?' absent':'') + (i<3 && !r.absent ? ' top':'');
-  const streakHtml = r.streak ? `<span class="sstreak${r.streak[1]>=3?' hot':''}">${r.streak[1]}${r.streak[0]} streak</span>` : '';
-  row.innerHTML = `
-    <div class="spos">${r.absent?'—':i+1}</div>
-    <img src="${portrait(r.id)}" alt="${r.name}">
-    <div class="sname"><span class="name">${r.name}</span><span class="jp">${r.jp}</span>${!r.absent?'<span class="chev">▸</span>':''}</div>
-    <div class="srank">${r.rank}</div>
-    <div class="formdots">${dotsHtml(r.form)}</div>
-    ${ r.absent ? '<span class="tag-abs">ABSENT</span>' :
-      `<div class="srec-wrap"><div class="srec">${r.rec[0]}<span class="l"> - ${r.rec[1]}</span></div>${streakHtml}</div>` }
-  `;
-  standingsEl.appendChild(row);
+const DAYS_MADE = Object.keys(DATA_DAYS).map(Number).sort((a,b)=>a-b);
+let currentDay = null;
 
-  if(r.absent) return;
-  const detail = document.createElement('div');
-  detail.className = 'sdetail';
-  detail.hidden = true;
-  const bw = r.bw ? `<b>${r.name}</b>'s best win this basho: beat <b>${r.bw.name}</b> (${r.bw.rank}) on Day ${r.bw.day}.`
-                  : `${r.name} hasn't recorded a win over a title-holder (Sekiwake or above) yet this basho.`;
-  detail.innerHTML = `
-    <div class="sdetail-grid">
-      <div>
-        <h4>Fighting style this basho (wins by technique family)</h4>
-        ${styleBar(r.style)}
-        <p class="bw-line">${bw}</p>
-      </div>
-      <div>
-        <h4>Physical profile vs. the Makuuchi field</h4>
-        ${rangeRow('Height', r.h, 'cm', DATA.field.h)}
-        ${rangeRow('Weight', r.wt, 'kg', DATA.field.wt)}
-        ${rangeRow('Age', r.age, ' yo', DATA.field.age)}
-      </div>
-    </div>
-  `;
-  standingsEl.appendChild(detail);
-  row.tabIndex = 0;
-  row.setAttribute('role', 'button');
-  row.setAttribute('aria-expanded', 'false');
-  const toggle = ()=>{
-    detail.hidden = !detail.hidden;
-    row.classList.toggle('open', !detail.hidden);
-    row.setAttribute('aria-expanded', String(!detail.hidden));
-  };
-  row.addEventListener('click', toggle);
-  row.addEventListener('keydown', e=>{
-    if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggle(); }
+// day nav — built once, updated in place
+const nav = document.getElementById('daynav');
+for(let d=1; d<=15; d++){
+  const made = DATA_DAYS[d];
+  const el = document.createElement(made ? 'button' : 'span');
+  el.textContent = d;
+  el.className = 'chip' + (made ? '' : ' todo');
+  el.dataset.day = d;
+  if(made){ el.type = 'button'; el.addEventListener('click', () => renderDay(d)); }
+  else { el.title = 'Not published yet'; }
+  nav.appendChild(el);
+}
+
+function renderDay(n){
+  const d = DATA_DAYS[n];
+  if(!d) return;
+  currentDay = n;
+  history.replaceState(null, '', '#day' + n);
+
+  nav.querySelectorAll('.chip').forEach(el=>{
+    const dd = Number(el.dataset.day);
+    el.classList.toggle('current', dd === n);
+    el.classList.toggle('done', DATA_DAYS[dd] && dd !== n);
   });
-});
 
-// stats
-document.getElementById('totalBouts').textContent = DATA.total_bouts_so_far;
-const max = Math.max(...DATA.kim_stats.map(k=>k.count));
-const kimEl = document.getElementById('kimChart');
-DATA.kim_stats.forEach(k=>{
-  const row = document.createElement('div');
-  row.className = 'chart-row';
-  row.innerHTML = `
-    <div class="clabel">${k.en}</div>
-    <div class="track"><div class="fill" style="width:${(k.count/max*100).toFixed(0)}%"></div></div>
-    <div class="cval">${k.count}</div>
+  document.getElementById('ytFrame').src = `https://www.youtube-nocookie.com/embed/${d.video}`;
+  document.getElementById('ytFrame').title = `Day ${n} — Aki Basho, Makuuchi standings in manga style`;
+  document.getElementById('ytLink').href = `https://youtu.be/${d.video}`;
+
+  document.getElementById('dayTitle').textContent = `DAY ${n}`;
+  document.getElementById('dayMeta').textContent = `${d.bouts.length} bouts · Makuuchi division · all-manga cast`;
+
+  const L = d.leader;
+  document.getElementById('leaderCard').innerHTML = `
+    <img src="${portrait(L.id)}" alt="${L.name}">
+    <div>
+      <div class="l1">Yūshō race leader</div>
+      <div class="l2">${L.name}</div>
+      <div class="l3">${L.jp} · ${L.rank} · ${L.streak[1]}${L.streak[0]} streak</div>
+    </div>
+    <div class="rec">${L.rec[0]}<small>&nbsp;-&nbsp;</small>${L.rec[1]}</div>
   `;
-  kimEl.appendChild(row);
-});
+
+  const rc = RECAPS[n] || {en:'', jp:''};
+  document.getElementById('recapEn').innerHTML = rc.en;
+  document.getElementById('recapJp').textContent = rc.jp;
+
+  document.getElementById('boutCount').textContent = `${d.bouts.length} bouts`;
+  const boutsEl = document.getElementById('bouts');
+  boutsEl.innerHTML = '';
+  d.bouts.forEach((b,i)=>{
+    const aWin = b.winner_id === b.a_id;
+    const row = document.createElement('div');
+    row.className = 'bout';
+    row.innerHTML = `
+      <div class="n">${i+1}</div>
+      <div class="side east ${aWin?'':'loser'}">
+        <img src="${portrait(b.a_id)}" alt="${b.a}">
+        <div class="nm"><div class="name">${b.a}${isGuest(b.a_rank)?'<span class="guest-badge">GUEST</span>':''}</div><div class="rank">${b.a_rank}</div></div>
+      </div>
+      <div class="vs">VS<span class="kim">${b.kimarite_en}</span></div>
+      <div class="side b west ${aWin?'loser':''}">
+        <img src="${portrait(b.b_id)}" alt="${b.b}">
+        <div class="nm"><div class="name">${b.b}${isGuest(b.b_rank)?'<span class="guest-badge">GUEST</span>':''}</div><div class="rank">${b.b_rank}</div></div>
+      </div>
+    `;
+    boutsEl.appendChild(row);
+  });
+
+  document.getElementById('standingsCount').textContent = `after day ${n}`;
+  const standingsEl = document.getElementById('standings');
+  standingsEl.innerHTML = '';
+  d.standings.forEach((r,i)=>{
+    const row = document.createElement('div');
+    row.className = 'srow' + (r.absent?' absent':'') + (i<3 && !r.absent ? ' top':'');
+    const streakHtml = r.streak ? `<span class="sstreak${r.streak[1]>=3?' hot':''}">${r.streak[1]}${r.streak[0]} streak</span>` : '';
+    row.innerHTML = `
+      <div class="spos">${r.absent?'—':i+1}</div>
+      <img src="${portrait(r.id)}" alt="${r.name}">
+      <div class="sname"><span class="name">${r.name}</span><span class="jp">${r.jp}</span>${!r.absent?'<span class="chev">▸</span>':''}</div>
+      <div class="srank">${r.rank}</div>
+      <div class="formdots">${dotsHtml(r.form)}</div>
+      ${ r.absent ? '<span class="tag-abs">ABSENT</span>' :
+        `<div class="srec-wrap"><div class="srec">${r.rec[0]}<span class="l"> - ${r.rec[1]}</span></div>${streakHtml}</div>` }
+    `;
+    standingsEl.appendChild(row);
+
+    if(r.absent) return;
+    const detail = document.createElement('div');
+    detail.className = 'sdetail';
+    detail.hidden = true;
+    const bw = r.bw ? `<b>${r.name}</b>'s best win this basho: beat <b>${r.bw.name}</b> (${r.bw.rank}) on Day ${r.bw.day}.`
+                    : `${r.name} hasn't recorded a win over a title-holder (Sekiwake or above) yet this basho.`;
+    detail.innerHTML = `
+      <div class="sdetail-grid">
+        <div>
+          <h4>Fighting style this basho (wins by technique family)</h4>
+          ${styleBar(r.style)}
+          <p class="bw-line">${bw}</p>
+        </div>
+        <div>
+          <h4>Physical profile vs. the Makuuchi field</h4>
+          ${rangeRow('Height', r.h, 'cm', FIELD.h)}
+          ${rangeRow('Weight', r.wt, 'kg', FIELD.wt)}
+          ${rangeRow('Age', r.age, ' yo', FIELD.age)}
+        </div>
+      </div>
+    `;
+    standingsEl.appendChild(detail);
+    row.tabIndex = 0;
+    row.setAttribute('role', 'button');
+    row.setAttribute('aria-expanded', 'false');
+    const toggle = ()=>{
+      detail.hidden = !detail.hidden;
+      row.classList.toggle('open', !detail.hidden);
+      row.setAttribute('aria-expanded', String(!detail.hidden));
+    };
+    row.addEventListener('click', toggle);
+    row.addEventListener('keydown', e=>{
+      if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggle(); }
+    });
+  });
+
+  document.getElementById('statsCount').textContent = `days 1–${n}`;
+  document.getElementById('totalBouts').textContent = d.total_bouts_so_far;
+  document.getElementById('totalBoutsLbl').textContent = `Makuuchi bouts across ${n} completed day${n>1?'s':''}`;
+  const max = Math.max(...d.kim_stats.map(k=>k.count));
+  const kimEl = document.getElementById('kimChart');
+  kimEl.innerHTML = '';
+  d.kim_stats.forEach(k=>{
+    const row = document.createElement('div');
+    row.className = 'chart-row';
+    row.innerHTML = `
+      <div class="clabel">${k.en}</div>
+      <div class="track"><div class="fill" style="width:${(k.count/max*100).toFixed(0)}%"></div></div>
+      <div class="cval">${k.count}</div>
+    `;
+    kimEl.appendChild(row);
+  });
+}
+
+const hashDay = Number((location.hash || '').replace('#day',''));
+renderDay(DATA_DAYS[hashDay] ? hashDay : Math.max(...DAYS_MADE));
 </script>
